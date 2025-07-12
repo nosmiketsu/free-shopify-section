@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      /* Add a unique class name to the container to isolate CSS styles */
+      .custom-container {
+        * {
+          box-sizing: border-box;
+        }
+        font-family: Verdana, sans-serif;
+        margin: 0;
+      }
+
+      /* Two-column layout */
+      .custom-container .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      /* First column (image slider) */
+      .custom-container .column1 {
+        flex: 1;
+        max-width: 600px;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+
+      .custom-container .mySlides {
+        display: none;
+      }
+      .custom-container img {
+        vertical-align: middle;
+        width: 100%;
+        height: auto;
+      }
+
+      /* Slideshow container */
+      .custom-container .slideshow-container {
+        position: relative;
+      }
+
+      /* Caption text */
+      .custom-container .text {
+        color: #f2f2f2;
+        font-size: 15px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* The dots/bullets/indicators */
+      .custom-container .dot {
+        cursor: pointer;
+        height: 30px;
+        width: 30px;
+        margin: 0 2px;
+        background-color: #d31334; /* Red */
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+        outline: 1px solid black; /* Add an outline to the dots */
+      }
+
+      .custom-container .dot.active {
+        background-color: #ffffff; /* White (Active dot color) */
+      }
+
+      /* Additional colored dots */
+      .custom-container .dot:nth-child(2) {
+        background-color: #20535d; /* Teal */
+      }
+      .custom-container .dot:nth-child(3) {
+        background-color: #292e33; /* Dark Gray */
+      }
+      .custom-container .dot:nth-child(4) {
+        background-color: #2e3c4b; /* Dark Blue */
+      }
+      .custom-container .dot:nth-child(5) {
+        background-color: #3c4f39; /* Dark Green */
+      }
+      .custom-container .dot:nth-child(6) {
+        background-color: #ffffff; /* White */
+      }
+
+      /* Second column (bullet points and CTA button) */
+      .custom-container .column2 {
+        flex: 1;
+        max-width: 600px;
+        background-color: #f4f4f4;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Position the content to the left */
+        justify-content: center;
+      }
+
+      .custom-container .bullet-points {
+        font-size: 24px; /* Updated heading font size */
+        font-family: Calibre, sans-serif; /* Use Calibre font */
+        text-align: center;
+      }
+
+      .custom-container .bullet-points ul {
+        list-style-type: none;
+        padding-left: 0; /* Remove padding for bullet points */
+      }
+
+      .custom-container .bullet-points li {
+        margin-bottom: 10px;
+      }
+
+      .custom-container .bullet-points li::before {
+        content: '';
+        display: none; /* Hide bullet points */
+      }
+
+      .custom-container .bullet-points .shop-button {
+        display: block;
+        margin-top: 20px;
+        background-color: #d31334;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        text-decoration: none;
+        font-size: 20px; /* Updated CTA button font size */
+        font-weight: bold; /* Use bold font for CTA button */
+        border-radius: 5px;
+        text-transform: uppercase; /* Capitalize the CTA button text */
+      }
+
+      /* Responsive adjustments */
+      @media screen and (max-width: 768px) {
+        .custom-container .row {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .custom-container .column1,
+        .custom-container .column2 {
+          max-width: 100%;
+        }
+
+        .custom-container .bullet-points li::before {
+          top: 5px; /* Adjusted icon size for mobile */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Add the custom-container class to isolate the custom code -->
+    <div class="custom-container">
+      <div class="row">
+        <!-- First column - Image Slider -->
+        <div class="column1">
+          <div class="slideshow-container">
+            <div class="mySlides fade">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0531/1506/0388/products/JA_AnytimeTee_Asphalt_PDP_7_3b6c5a85-1cad-4801-b568-7287c2f6cc17.jpg?v=1682098854"
+                alt="Asphalt"
+              >
+              <div class="text">Asphalt</div>
+            </div>
+            <!-- Add other slides here -->
+            <div class="mySlides fade">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0531/1506/0388/files/JA_AnytimeTee_BeringSea_PDP_7_bc98cca5-acdb-4cc5-b80f-c16d7b6a6f84.jpg?v=1683054252"
+                alt="Bering Sea"
+              >
+              <div class="text">Bering Sea</div>
+            </div>
+            <div class="mySlides fade">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0531/1506/0388/files/JA_AnytimeTee_SpaceBlack_PDP_6_a3cc6b4d-64c2-47d8-8f96-3545a5683b91.jpg?v=1683053309"
+                alt="Space Black"
+              >
+              <div class="text">Space Black</div>
+            </div>
+            <div class="mySlides fade">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0531/1506/0388/products/JA_AnytimeTee_Navy_PDP_8.jpg?v=1682090292"
+                alt="Dark Blue"
+              >
+              <div class="text">Dark Blue</div>
+            </div>
+            <div class="mySlides fade">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0531/1506/0388/products/JA_AnytimeTee_DarkOlive_PDP_8_183961d0-afa6-441e-91da-e8ce1d1adf0e.jpg?v=1682952391"
+                alt="Dark Olive"
+              >
+              <div class="text">Dark Olive</div>
+            </div>
+            <div class="mySlides fade">
+              <img
+                src="https://jackarcher.com/cdn/shop/products/JA_AnytimeTee_White_PDP_1_b5bf5636-99b1-48c0-9870-3e4c1427c9fd_800x.jpg?v=1690233300"
+                alt="White"
+              >
+              <div class="text" style="color: black;">White</div>
+            </div>
+          </div>
+          <br>
+          <div class="slideshow-text">
+            <p style="text-align: center; font-size: 20px; font-weight: bold;">Available in these colors</p>
+            <div style="text-align: center">
+              <span class="dot" onclick="currentSlide(1)" style="background-color: #323035;"></span>
+              <span class="dot" onclick="currentSlide(2)" style="background-color: #5C7592;"></span>
+              <span class="dot" onclick="currentSlide(3)" style="background-color: #292E33;"></span>
+              <span class="dot" onclick="currentSlide(4)" style="background-color: #2E3C4B;"></span>
+              <span class="dot" onclick="currentSlide(5)" style="background-color: #3C4F39;"></span>
+              <span class="dot" onclick="currentSlide(6)" style="background-color: #FFFFFF;"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second column - Bullet Points and CTA Button -->
+        <div class="column2">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0531/1506/0388/files/Anytime_Tee_Description.jpg?v=1690205944"
+            alt="Anytime Tee Description"
+            style="max-width: 100%;"
+          >
+          <div class="bullet-points">
+            <!-- Add bullet points here -->
+            <a href="https://jackarcher.com/pages/build-your-own-bundle#byo-section" class="shop-button"
+              >Shop the Bundle</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let slideIndex = 1;
+      showSlides(slideIndex);
+
+      function plusSlides(n) {
+        showSlides((slideIndex += n));
+      }
+
+      function currentSlide(n) {
+        showSlides((slideIndex = n));
+      }
+
+      function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName('mySlides');
+        let dots = document.getElementsByClassName('dot');
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = 'none';
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].classList.remove('active');
+        }
+        slides[slideIndex - 1].style.display = 'block';
+        dots[slideIndex - 1].classList.add('active');
+      }
+    </script>
+  </body>
+</html>
