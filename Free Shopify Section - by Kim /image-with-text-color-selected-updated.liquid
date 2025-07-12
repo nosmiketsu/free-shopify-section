@@ -1,0 +1,663 @@
+<!doctype html>
+  <html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+        /* Add a unique class name to the container to isolate CSS styles */
+        .custom-container {
+          * {
+            box-sizing: border-box;
+          }
+          font-family: Verdana, sans-serif;
+          margin: 0;
+        }
+  
+        /* Two-column layout */
+        .custom-container .row {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin: 20px 0;
+        }
+  
+        /* First column (image slider) */
+        .custom-container .column1 {
+          flex: 1;
+          max-width: 600px;
+          background-color: none !important;
+          padding: 20px;
+        }
+  
+        .custom-container .mySlides {
+          display: none;
+        }
+        .custom-container img {
+          vertical-align: middle;
+          width: 100%;
+          height: auto;
+        }
+  
+        /* Slideshow container */
+        .custom-container .slideshow-container {
+          position: relative;
+        }
+  
+        /* Caption text */
+        .custom-container .text {
+          color: #f2f2f2;
+          font-size: 15px;
+          padding: 8px 12px;
+          position: absolute;
+          bottom: 8px;
+          width: 100%;
+          text-align: center;
+        }
+  
+        /* The dots/bullets/indicators */
+        .custom-container .dot {
+          cursor: pointer;
+          height: 30px;
+          width: 30px;
+          margin: 0 2px;
+          background-color: #d31334; /* Red */
+          border-radius: 50%;
+          display: inline-block;
+          transition: background-color 0.6s ease;
+          outline: 1px solid black; /* Add an outline to the dots */
+        }
+  
+        .custom-container .dot.active {
+          background-color: #ffffff; /* White (Active dot color) */
+        }
+  
+        /* Additional colored dots */
+        .custom-container .dot:nth-child(2) {
+          background-color: #20535d; /* Teal */
+        }
+        .custom-container .dot:nth-child(3) {
+          background-color: #292e33; /* Dark Gray */
+        }
+        .custom-container .dot:nth-child(4) {
+          background-color: #2e3c4b; /* Dark Blue */
+        }
+        .custom-container .dot:nth-child(5) {
+          background-color: #3c4f39; /* Dark Green */
+        }
+        .custom-container .dot:nth-child(6) {
+          background-color: #ffffff; /* White */
+        }
+  
+        /* Second column (bullet points and CTA button) */
+        .custom-container .column2 {
+          flex: 1;
+          max-width: 600px;
+          background-color: none !important;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start; /* Position the content to the left */
+          justify-content: center;
+        }
+  
+        .custom-container .bullet-points {
+          font-size: 24px; /* Updated heading font size */
+          font-family: Calibre, sans-serif; /* Use Calibre font */
+          text-align: center;
+        }
+  
+        .custom-container .bullet-points ul {
+          list-style-type: none;
+          padding-left: 0; /* Remove padding for bullet points */
+        }
+  
+        .custom-container .bullet-points li {
+          margin-bottom: 10px;
+        }
+  
+        .custom-container .bullet-points li::before {
+          content: '';
+          display: none; /* Hide bullet points */
+        }
+  
+        .custom-container .bullet-points .shop-button {
+          display: block;
+          margin-top: 20px;
+          background-color: #d31334;
+          color: white;
+          text-align: center;
+          padding: 10px;
+          text-decoration: none;
+          font-size: 20px; /* Updated CTA button font size */
+          font-weight: bold; /* Use bold font for CTA button */
+          border-radius: 5px;
+          text-transform: uppercase; /* Capitalize the CTA button text */
+        }
+  
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+          .custom-container .row {
+            flex-direction: column;
+            align-items: center;
+          }
+  
+          .custom-container .column1,
+          .custom-container .column2 {
+            max-width: 100%;
+          }
+  
+          .custom-container .bullet-points li::before {
+            top: 5px; /* Adjusted icon size for mobile */
+          }
+        }
+  
+        .hide-if-none-bg {
+          display: none !important;
+        }
+        .newTextWithImage__list {
+          max-width: 433px;
+        }
+        .newTextWithImage__list {
+          max-height: 554px;
+        }
+       .content_title {
+          text-align: left;
+          font-family: 'Calibre';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 44px;
+          line-height: 53px;
+        }
+        p.content_subtitle {
+          font-weight: 600;
+          font-size: 28px;
+          line-height: 90%;
+      }
+     p.content_description {
+        font-weight: 400;
+      font-size: 30px;
+      line-height: 36px;
+      }
+      ul li {
+        list-style: none;
+        display: flex;
+        align-items: flex-start;
+        gap: 5px;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 26px;
+        margin: 17px 0;
+      }
+    .newTextWithImage__item img {
+      width: auto!important;
+    }
+      </style>
+    </head>
+    <body>
+      <!-- Add the custom-container class to isolate the custom code -->
+      <section id="section-{{ section.id }}">
+        <div class="custom-container">
+          <div class="row">
+            {%- if section.settings.image_position == 'left' -%}
+              <!-- First column - Image Slider -->
+              <div class="column1">
+                <div class="slideshow-container">
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_slide | img_url:'master' }}"
+                      alt="Asphalt"
+                    >
+                    <div class="text">{{ section.settings.color_name_1 }}</div>
+                  </div>
+                  <!-- Add other slides here -->
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_2 | img_url:'master' }}"
+                      alt="Bering Sea"
+                    >
+                    <div class="text">{{ section.settings.color_name_2 }}</div>
+                  </div>
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_3 | img_url:'master' }}"
+                      alt="Space Black"
+                    >
+                    <div class="text">{{ section.settings.color_name_3 }}</div>
+                  </div>
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_4 | img_url:'master' }}"
+                      alt="Dark Blue"
+                    >
+                    <div class="text">{{ section.settings.color_name_4 }}</div>
+                  </div>
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_5 | img_url:'master' }}"
+                      alt="Dark Olive"
+                    >
+                    <div class="text">{{ section.settings.color_name_5 }}</div>
+                  </div>
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_6 | img_url:'master' }}"
+                      alt="White"
+                    >
+                    <div class="text" style="color: black;">{{ section.settings.color_name_6 }}</div>
+                  </div>
+                </div>
+                <br>
+                <div class="slideshow-text">
+                  <p style="text-align: center; font-size: 20px; font-weight: bold;">Available in these colors</p>
+                  <div style="text-align: center">
+                    <span
+                      class="dot"
+                      onclick="currentSlide(1)"
+                      style="background-color: {{ section.settings.color_1 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(2)"
+                      style="background-color: {{ section.settings.color_2 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(3)"
+                      style="background-color: {{ section.settings.color_3 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(4)"
+                      style="background-color: {{ section.settings.color_4 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(5)"
+                      style="background-color: {{ section.settings.color_5 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(6)"
+                      style="background-color: {{ section.settings.color_6 }};"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Second column - Bullet Points and CTA Button -->
+              <div class="column2">
+                <h2 class="content_title">{{ section.settings.content_title }}</h2>
+                <p class="content_subtitle">{{ section.settings.content_subtitle }}</p>
+                <p class="content_description">{{ section.settings.content_description }}</p>
+                <ul class="newTextWithImage__list">
+                  {% for block in section.blocks %}
+                    <li class="newTextWithImage__item">
+                      
+                      <img src="{{ block.settings.list_item_image | img_url }} alt="{{ block.settings.image.alt }}">
+                      
+                      {% if block.settings.list_item_description != blank %}
+                      <div class="newTextWithImage__description">{{ block.settings.list_item_description }}</div>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                 </ul>
+                <div class="bullet-points">
+                  <!-- Add bullet points here -->
+                  <a href="{{ section.settings.button_url }}" class="shop-button"
+                    >{{ section.settings.button_copies }}</a
+                  >
+                </div>
+              </div>
+            {%- else -%}
+              <!-- Second column - Bullet Points and CTA Button -->
+              <div class="column2">
+                <h2 class="content_title">{{ section.settings.content_title }}</h2>
+                <p class="content_subtitle">{{ section.settings.content_subtitle }}</p>
+                <p class="content_description">{{ section.settings.content_description }}</p>
+                <ul class="newTextWithImage__list">
+                  {% for block in section.blocks %}
+                    <li class="newTextWithImage__item">
+                      
+                      <img src="{{ block.settings.list_item_image | img_url }}" alt="{{ block.settings.image.alt }}">
+                      
+                      {% if block.settings.list_item_description != blank %}
+                      <div class="newTextWithImage__description">{{ block.settings.list_item_description }}</div>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                 </ul>
+                <div class="bullet-points">
+                  <!-- Add bullet points here -->
+                  <a href="{{ section.settings.button_url }}" class="shop-button"
+                  >{{ section.settings.button_copies }}</a
+                >
+                </div>
+              </div>
+  
+              <!-- First column - Image Slider -->
+              <div class="column1">
+                <div class="slideshow-container">
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_slide | img_url:'master' }}"
+                      alt="Asphalt"
+                    >
+                    <div class="text">{{ section.settings.color_name_1 }}</div>
+                  </div>
+                  <!-- Add other slides here -->
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_2 | img_url:'master' }}"
+                      alt="Bering Sea"
+                    >
+                    <div class="text">{{ section.settings.color_name_2 }}</div>
+                  </div>
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_3 | img_url:'master' }}"
+                      alt="Space Black"
+                    >
+                    <div class="text">{{ section.settings.color_name_3 }}</div>
+                  </div>
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_4 | img_url:'master' }}"
+                      alt="Dark Blue"
+                    >
+                    <div class="text">{{ section.settings.color_name_4 }}</div>
+                  </div>
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_5 | img_url:'master' }}"
+                      alt="Dark Olive"
+                    >
+                    <div class="text">{{ section.settings.color_name_5 }}</div>
+                  </div>
+                  <div class="mySlides fade">
+                    <img
+                      src="{{ section.settings.image_6 | img_url:'master' }}"
+                      alt="White"
+                    >
+                    <div class="text" style="color: black;">{{ section.settings.color_name_6 }}</div>
+                  </div>
+                </div>
+                <br>
+                <div class="slideshow-text">
+                  <p style="text-align: center; font-size: 20px; font-weight: bold;">Available in these colors</p>
+                  <div style="text-align: center">
+                    <span
+                      class="dot"
+                      onclick="currentSlide(1)"
+                      style="background-color: {{ section.settings.color_1 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(2)"
+                      style="background-color: {{ section.settings.color_2 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(3)"
+                      style="background-color: {{ section.settings.color_3 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(4)"
+                      style="background-color: {{ section.settings.color_4 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(5)"
+                      style="background-color: {{ section.settings.color_5 }};"
+                    ></span>
+                    <span
+                      class="dot"
+                      onclick="currentSlide(6)"
+                      style="background-color: {{ section.settings.color_6 }};"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </section>
+  
+      <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+  
+        function plusSlides(n) {
+          showSlides((slideIndex += n));
+        }
+  
+        function currentSlide(n) {
+          showSlides((slideIndex = n));
+        }
+  
+        function showSlides(n) {
+          let i;
+          let slides = document.getElementsByClassName('mySlides');
+          let dots = document.getElementsByClassName('dot');
+          if (n > slides.length) {
+            slideIndex = 1;
+          }
+          if (n < 1) {
+            slideIndex = slides.length;
+          }
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = 'none';
+          }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].classList.remove('active');
+          }
+          slides[slideIndex - 1].style.display = 'block';
+          dots[slideIndex - 1].classList.add('active');
+        }
+      </script>
+  
+      <script>
+        $(document).ready(function () {
+          for (var i = 1; i <= 6; i++) {
+            var dotSelector = '.dot:nth-child(' + i + ')';
+            var backgroundColor = $(dotSelector).css('background-color');
+  
+            if (
+              backgroundColor === 'rgba(0, 0, 0, 0)' ||
+              backgroundColor === 'transparent' ||
+              backgroundColor === 'none'
+            ) {
+              $(dotSelector).addClass('hide-if-none-bg');
+            }
+          }
+        });
+      </script>
+    </body>
+  </html>
+  
+  {% schema %}
+  {
+    "name": "Image W/ Text W Swatches",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Tees, Pants, & Boxer Images here"
+      },
+      {
+        "id": "image_slide",
+        "type": "image_picker",
+        "label": "Image 1"
+      },
+      {
+        "id": "color_name_1",
+        "type": "text",
+        "label": "Color Name",
+        "default": "Asphalt"
+      },
+      {
+        "id": "image_2",
+        "type": "image_picker",
+        "label": "Image 2"
+      },
+      {
+        "id": "color_name_2",
+        "type": "text",
+        "label": "Color Name",
+        "default": "Asphalt"
+      },
+      {
+        "id": "image_3",
+        "type": "image_picker",
+        "label": "Image 3"
+      },
+      {
+        "id": "color_name_3",
+        "type": "text",
+        "label": "Color Name",
+        "default": "Asphalt"
+      },
+      {
+        "id": "image_4",
+        "type": "image_picker",
+        "label": "Image 4"
+      },
+      {
+        "id": "color_name_4",
+        "type": "text",
+        "label": "Color Name",
+        "default": "Asphalt"
+      },
+      {
+        "id": "image_5",
+        "type": "image_picker",
+        "label": "Image 5"
+      },
+      {
+        "id": "color_name_5",
+        "type": "text",
+        "label": "Color Name",
+        "default": "Asphalt"
+      },
+      {
+        "id": "image_6",
+        "type": "image_picker",
+        "label": "Image 6"
+      },
+      {
+        "id": "color_name_6",
+        "type": "text",
+        "label": "Color Name",
+        "default": "Asphalt"
+      },
+      {
+        "type": "header",
+        "content": "Color Swatches"
+      },
+      {
+        "id": "color_1",
+        "type": "color",
+        "label": " Color Code",
+        "default": "#000000" // Default Set Color Code
+      },
+      {
+        "id": "color_2",
+        "type": "color",
+        "label": " Color Code",
+        "default": "#000000" // Default Set Color Code
+      },
+      {
+        "id": "color_3",
+        "type": "color",
+        "label": " Color Code",
+        "default": "#000000" // Default Set Color Code
+      },
+      {
+        "id": "color_4",
+        "type": "color",
+        "label": " Color Code",
+        "default": "#000000" // Default Set Color Code
+      },
+      {
+        "id": "color_5",
+        "type": "color",
+        "label": " Color Code",
+        "default": "#000000" // Default Set Color Code
+      },
+      {
+        "id": "color_6",
+        "type": "color",
+        "label": " Color Code",
+        "default": "#000000" // Default Set Color Code
+      },
+      {
+        "type": "header",
+        "content": "Copies Part Here"
+      },
+      {
+        "type": "text",
+        "id": "content_title",
+        "label": "Content Title"
+      },
+      {
+        "type": "text",
+        "id": "content_subtitle",
+        "label": "Content Subtitle"
+      },
+      {
+        "type": "text",
+        "id": "content_description",
+        "label": "Content Description"
+      },
+      {
+        "type": "text",
+        "id": "button_copies",
+        "label": "Content Button Text"
+      },
+      {
+      "type": "url",
+      "id": "button_url",
+      "label": "URL Here"
+      },
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Image position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "right"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "list_item",
+        "name": "List Item",
+        "settings": [
+          {
+            "id": "list_item_image",
+            "type": "image_picker",
+            "label": "Lis Item Image"
+          },
+          {
+            "id": "list_item_description",
+            "type": "richtext",
+            "label": "Item Decription"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image W/ Text W Swatches",
+        "settings": {}
+      }
+    ]
+  }
+  {% endschema %}
+  
