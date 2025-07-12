@@ -1,0 +1,86 @@
+<!-- This liquid file is the final liquid for new block of Product Section -->
+
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    /* Create two equal columns that floats next to each other */
+    .column-img {
+      float: left;
+      width: 25%;
+      padding: 10px 15px
+    }
+    .column-text {
+      float: left;
+      width: 75%;
+      font-family: var(--theme-font-family--serif--primary);
+    }
+    .text {
+        font-style: italic;
+    }
+    .icon-title {
+      font-size: 22px;
+    }
+    p {
+      margin-bottom: 0px;
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+      }
+    }
+    </style>
+
+    </head>
+    <body>
+
+    <div class="row">
+      <div class="column-img column">
+        <img src="{{block.settings.icon-image | img_url:'master' }}" width="80px;" height="78px;">
+      </div>
+      <div class="column-text column">
+        <h2 class="icon-title">{{block.settings.icon-title}}</h2>
+        <p class="icon-description"style="margin-top: 30px;">{{block.settings.icon-description}}</p>
+      </div>
+    </div>
+    <br><br>
+
+<!-- Schema added to the main-product-1.liquid line 97 -->
+{% schema %}
+  {
+    {
+      "name": "icons",
+      "type": "image",
+      "settings": [
+        {
+          "id": "icon-title",
+          "type": "text",
+          "default": "Title Here",
+          "label": "Title"
+        },
+        {
+          "id": "icon-description",
+          "type": "richtext",
+          "default": "<p>description here</p>",
+          "label": "Description"
+        },
+        {
+          "id": "icon-image",
+          "type": "image_picker",
+          "label": "Image"
+        }
+      ]
+    }
+  }
+{% endschema %}
+    
