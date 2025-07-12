@@ -1,0 +1,395 @@
+<!-- Main template for Section Liquid by Kimson Pomento -->
+
+<style>
+    /* Add your CSS styling here */
+  .container {
+  width: 100%;
+  padding: 0 15px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1160px;
+  }
+
+  .row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  }
+  .column {
+  flex: 1;
+  padding: 20px;
+  }
+
+  div#blogPost {
+  max-width: 66.666667%;
+  flex: 66.666667%;
+  }
+
+  .articles-content {
+  padding-left: 15px;
+  }
+
+  .articles-content h1 {
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 0;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  text-transform: uppercase;
+  }
+  .articles-content>p {
+  color: #000;
+  font-weight: 400;
+  text-transform: inherit;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  font-size: 18px;
+  padding-bottom: 10px;
+  }
+  .articles-content a {
+    color: blue;
+    text-decoration: underline;
+    }
+  .articles-content .top-image {
+  max-height: 370px;
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 30px;
+  }
+  .tabel-of-content {
+  background: #e7f7f0;
+  padding: 25px 40px 20px;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin-bottom: 30px;
+  border: 1px solid #bad3c8;
+  }
+
+  .tabel-of-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  }
+
+  * sidebar css here */
+
+  /* Display list items horizontally */
+  #linkList ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  text-decoration: none;
+  }
+
+  .tabel-of-content .link-list a {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  font-size: 15px;
+  color: #333;
+  position: relative;
+  padding: 0 0 0 23px;
+  text-decoration: none;
+  }
+
+  .inner-content-box {
+  margin-bottom: 0px;
+  }
+
+  .inner-content-box h2 {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin-bottom: 30px;
+  background: #f4f4f4;
+  padding: 20px;
+  }
+
+  /* sidebar css here */
+
+
+  .sidebar-sticky {
+  position: sticky;
+  top: 50px;
+  }
+
+  .sidebar-blog a {
+  color: black;
+  }
+
+  #linkList li {
+  padding: 15px 0px;
+  border-bottom: 1px solid #dddddd;
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  }
+
+  div#linkList {
+  max-width: 33.333%;
+  flex: 0 0 33.333333%;
+  }
+
+  /* Author css part style here */
+
+  .inner-author-box {
+  padding-top: 50px;
+  border-top: 1px solid #efefef;
+  }
+
+  .inner-author-box .author-box-img {
+  display: flex;
+  align-items: center !important;
+  margin-bottom: 5px;
+  }
+
+  .inner-author-box .author-box-img > img {
+  width: 100%;
+  max-width: 100px;
+  padding-right: 20px;
+  }
+
+  .author-box-img .author-box-name {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content; space-between;
+  width: 100%;
+  }
+
+  .author-box-img .publish-date {
+  margin-left: auto;
+  color: #707070;
+  padding-left: 10px;
+  font-size: 15px;
+  }
+  .inner-author-box .author-box-text {
+  width: 100%;
+  padding-left: 100px;
+  }
+
+  .inner-author-box .author-box-img .author-box-name h3 {
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  }
+
+  .author-name p {
+  font-size: 15px;
+  }
+</style>
+<div class="container">
+  <div class="row">
+    <!--
+      {%- render 'breadcrumb', container: 'compact', vertical_space: 'vertical-space-xsmall', style: 'breadcrumb-main--margin' -%}
+    -->
+    <div class="column" id="linkList">
+      <!-- Sidebar Part start -->
+      <ul class="sidebar-sticky">
+        {%- for block in section.blocks -%}
+          {%- case block.type %}
+            {%- when 'text' -%}
+              <li class="sidebar-blog">
+                <a href="{{ block.settings.link }}">{{ block.settings.sidebar_text }}</a>
+              </li>
+          {%- endcase %}
+        {% endfor %}
+      </ul>
+    </div>
+    <!-- Sidebar Part end -->
+    <!-- main blog section part start -->
+    <div class="column" id="blogPost">
+      <div class="articles-content">
+        <h1>{{ section.settings.title_blog }}</h1>
+        <p>By {{ section.settings.author_name }}</p>
+        <img class="top-image" src="{{ section.settings.image | image_url: width: 730 }}">
+        <!-- Table Content Part start -->
+        <div class="tabel-of-content">
+          <h3>{{ section.settings.toc }}</h3>
+          {%- for block in section.blocks -%}
+            {%- case block.type %}
+              {%- when 'heading' -%}
+                <div class="link-list">
+                  <a href="{{ block.settings.toc_link }}">&#10132; &nbsp; {{ block.settings.toc_list }}</a>
+                </div>
+            {%- endcase %}
+          {% endfor %}
+        </div>
+        <!-- Table Content Part end -->
+        <!-- Article Part Start -->
+        {{ section.settings.article_content }}
+        {% for block in section.blocks %}
+          <div class="inner-content-box">
+            {% case block.type %}
+              {% when 'header' %}
+                <h2 id="{{ block.settings.header_content_id }}">{{ block.settings.header_content }}</h2>
+              {% when 'paragraph' %}
+                <p>{{ block.settings.paragraph_content }}</p>
+            {% endcase %}
+          </div>
+        {% endfor %}
+        <!-- Article Part End -->
+        <hr>
+        <!-- Author Part Start -->
+        <div class="inner-author-box">
+          <div class="author-box-img">
+            <img src="{{ section.settings.author_pic | image_url: width: 230 }}">
+            <div class="author-box-name">
+              <div class="author-name">
+                <h3>{{ section.settings.author_name }}</h3>
+                <p>{{ section.settings.position }}</p>
+              </div>
+              <div class="publish-date">
+                <span class="date"> {{ section.settings.published_date }} </span>
+              </div>
+            </div>
+          </div>
+          <div class="author-box-text">
+            {{ section.settings.author_text }}
+          </div>
+          <!-- Author Part end -->
+          <!-- main blog section part end -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Blog Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_blog",
+      "label": "Page Title",
+      "default": "MAIN TITLE HERE"
+    },
+    {
+      "type": "text",
+      "id": "author_name",
+      "label": "Author Name",
+      "default": "Author"
+    },
+    {
+      "id": "image",
+      "type": "image_picker",
+      "label": "Top Image"
+    },
+    {
+      "type": "header",
+      "content": "Table of Content"
+    },
+    {
+      "type": "text",
+      "id": "toc",
+      "label": "Header"
+    },
+    {
+      "type": "richtext",
+      "id": "article_content",
+      "label": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_pic",
+      "label": "Author Picture"
+    },
+    {
+      "type": "text",
+      "id": "published_date",
+      "label": "Published Date"
+    },
+    {
+      "type": "text",
+      "id": "position",
+      "label": "Position/Job"
+    },
+    {
+      "type": "richtext",
+      "id": "author_text",
+      "label": "Short Description here..."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Sidebar List",
+      "settings": [
+        {
+          "type": "text",
+          "id": "sidebar_text",
+          "label": "Header",
+          "default": "Sidebar Menu Here"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Url"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "TOC List",
+      "settings": [
+        {
+          "type": "text",
+          "id": "toc_list",
+          "label": "Table Of Content List",
+          "default": "Table of Content List here"
+        },
+        {
+          "type": "url",
+          "id": "toc_link",
+          "label": "Url"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "name": "Header Content",
+      "settings": [
+        {
+          "type": "text",
+          "id": "header_content",
+          "label": "Header Content",
+          "default": "Header Content"
+        },
+        {
+          "type": "text",
+          "id": "header_content_id",
+          "label": "Header Id"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "name": "Paragraph Content",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "paragraph_content",
+          "label": "Paragraph Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Section"
+    }
+  ]
+}
+{% endschema %}
