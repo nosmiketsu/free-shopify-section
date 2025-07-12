@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Who We Serve</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
+      color: #6b7280; /* gray-500 */
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      margin: 0 auto;
+    }
+    h2 {
+      color: #4b7f46; /* green-600 */
+      font-weight: 800;
+      font-size: 1.75rem;
+      margin-top: .5rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #4b7f46;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    h4 {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #4b7f46;
+      margin-bottom: 0.75rem;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+    .intro {
+    text-align: center;
+    }
+    /* Buttons */
+    .btn {
+      background-color: #3A5EA4; /** defaul background color not selected **/
+      color: white;
+      font-weight: 700;
+      padding: 0.55rem 1.25rem;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      width: 180px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .btn:hover,
+    .btn:focus {
+      background-color: #91A6D0; /** background-color button selected **/
+      outline: none;
+    }
+    .btn.active {
+      background-color: #91A6D0; /** background-color button selected **/
+      box-shadow: 0 0 10px #a7d07a75;
+    }
+    /* Arrow on buttons */
+    .arrow {
+      font-size: 1.4rem;
+      line-height: 1;
+      transform: translateX(2px);
+    }
+    /* Layout */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+      align-items: flex-start;
+    }
+    .left-column {
+      flex: 1 1 220px;
+      max-width: 220px;
+    }
+    .right-column {
+      flex: 2 1 480px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    /* Image container */
+    .image-container img {
+      width: 100%;
+      display: block;
+      max-height: 320px;
+      object-fit: cover;
+    }
+    /* Content details on right side below the image */
+    .content-details {
+      padding: 1.75rem 1.5rem 2rem 1.5rem;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1rem;
+    }
+    ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      color: #6b7280; /** icon text color **/
+      font-weight: 500;
+    }
+    ul li .icon {
+      background-color: #6baf59; /** icon color **/
+      color: white;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 767px) {
+      .container {
+        flex-direction: column;
+      }
+      .left-column, .right-column {
+        max-width: 100%;
+        flex: 1 1 100%;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+      .btn .arrow {
+        display: none;
+      }
+    }
+    
+     /* styling for the button SEE Services */
+        #smartHomeButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #48A942;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 6px 39%;
+        }
+        #smartHomeButton:hover {
+            background-color: #48A942;
+        }
+  </style>
+</head>
+<body>
+  <section aria-labelledby="who-we-serve-title" role="region" aria-live="polite" aria-atomic="true">
+    <div class="container">
+      <!-- Left Buttons -->
+      <nav class="left-column" aria-label="Service Categories">
+        <button class="btn active" data-section="residential" aria-pressed="true" type="button">
+          Residential <span class="arrow" aria-hidden="true">›</span>
+        </button>
+        <button class="btn" data-section="commercial" aria-pressed="false" type="button">
+          Commercial <span class="arrow" aria-hidden="true">›</span>
+        </button>
+        <button class="btn" data-section="education" aria-pressed="false" type="button">
+          Education <span class="arrow" aria-hidden="true">›</span>
+        </button>
+        <button class="btn" data-section="government" aria-pressed="false" type="button">
+          Government <span class="arrow" aria-hidden="true">›</span>
+        </button>
+      </nav>
+
+      <!-- Right Content -->
+      <article class="right-column" aria-live="polite" aria-atomic="true" tabindex="0">
+        <!-- Dynamic content will be injected here -->
+        <button id="smartHomeButton">SEE SERVICES</button>
+      </article>
+    </div>
+  </section>
+
+<script>
+    const contentData = {
+      residential: {
+        image: {
+          src: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/74717cf7-89c2-46a2-a2d2-b02a3dff7d14.png",
+          alt: "Modern living room with large windows showing mountain views, neutral-toned sectional couch under warm wooden beams",
+        },
+        category: "Residential",
+        heading: "Let’s Make Your Home Smarter",
+        description:
+          "With more smart devices than ever, your home network needs to be strong, secure, and reliable. We design it right from the start—so your WiFi, smart home features, and security systems all work together, just as they should.",
+        features: [
+          "We power your home with commercial-grade WiFi.",
+          "We design smart systems that are simple to use, even for the whole family.",
+          "Get peace of mind with our easy-to-use smart locks, alarms, and cameras.",
+        ],
+        url: "https://google.com", // URL for residential
+      },
+      commercial: {
+        image: {
+          src: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/16070228-0d61-4615-93cf-0b04ece867c4.png",
+          alt: "Bright commercial office lobby with glass doors and contemporary furniture, large plants and bright natural daylight",
+        },
+        category: "Commercial",
+        heading: "Smarter Technology for Your Business",
+        description:
+          "A commercial space requires technology that works seamlessly for employees and customers alike. From networking to security and beyond, we ensure your business operations stay efficient and secure.",
+        features: [
+          "Scalable, secure network infrastructure tailored for your business.",
+          "Advanced surveillance and access control systems.",
+          "Ongoing support to keep your technology running smoothly.",
+        ],
+        url: "https://example.com/commercial", // URL for commercial
+      },
+      
+      education: {
+        image: {
+          src: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/af21f413-55e0-4d0b-a6f3-0f527d216a8f.png",
+          alt: "Modern school library with students studying, open bookshelves and bright workspace with computers",
+        },
+        category: "Education",
+        heading: "Empowering Learning Spaces",
+        description:
+          "Educational institutions need tech that supports dynamic learning environments. We provide reliable connectivity, security, and tools that enhance the learning experience for students and faculty.",
+        features: [
+          "Robust WiFi that covers classrooms and common areas.",
+          "Security systems designed for student and staff safety.",
+          "Technology solutions that enable interactive learning.",
+        ],
+        url: "https://example.com/commercial", // URL for commercial
+      },
+      government: {
+        image: {
+          src: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e0254a80-4b13-4284-8893-acfaa53dd380.png",
+          alt: "Interior of government building with formal seating, beams, and official decor",
+        },
+        category: "Government",
+        heading: "Secure and Reliable Solutions",
+        description:
+          "Government buildings demand technology that meets high standards of security and reliability. We deliver systems that protect sensitive data and ensure uninterrupted service.",
+        features: [
+          "Highly secure communication networks.",
+          "Access management and surveillance tailored for government standards.",
+          "Dedicated support with priority response times.",
+        ],
+        url: "https://example.com/commercial", // URL for commercial
+      },
+      // Add URLs for education and government categories as needed
+    };
+
+    const buttons = document.querySelectorAll(".btn");
+    const rightColumn = document.querySelector(".right-column");
+
+    function createContentSection(data) {
+      return `
+        <div class="image-container">
+          <img src="${data.image.src}" alt="${data.image.alt}" onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/51576609-c34f-412f-9356-c19fb761a0b2.png';" />
+        </div>
+        <div class="content-details">
+          <h3>${data.category}</h3>
+          <h4>${data.heading}</h4>
+          <p>${data.description}</p>
+          <ul>
+            ${data.features
+              .map(
+                feature =>
+                  `<li><span class="icon" aria-hidden="true">➔</span>${feature}</li>`
+              )
+              .join("")}
+          </ul>
+        </div>
+      `;
+    }
+
+    function setActiveButton(selectedButton) {
+      buttons.forEach((btn) => {
+        const isActive = btn === selectedButton;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-pressed", isActive.toString());
+      });
+    }
+
+    function loadSection(section) {
+      if (!contentData[section]) return;
+      const data = contentData[section];
+      rightColumn.innerHTML = createContentSection(data);
+      
+      // Append the button after the content
+      const buttonHTML = `<button id="smartHomeButton">SEE SERVICES</button>`;
+      rightColumn.innerHTML += buttonHTML; // Append the button to the right column
+
+      // Set the button URL for the selected section
+      setButtonUrl(section);
+      
+      rightColumn.focus();
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setActiveButton(btn);
+        loadSection(btn.dataset.section);
+      });
+    });
+
+    // Initialize with Residential content on page load
+    window.addEventListener("DOMContentLoaded", () => {
+      loadSection("residential");
+    });
+    
+    // Function to set the button URL based on the selected category
+    function setButtonUrl(category) {
+        const url = contentData[category].url; // Get the URL for the selected category
+        document.getElementById('smartHomeButton').onclick = function() {
+            window.location.href = url; // Redirect to the specified URL
+        };
+    }
+</script>
+
+
+</body>
+</html>
