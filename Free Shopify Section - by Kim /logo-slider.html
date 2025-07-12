@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Logo Slider with Controls</title>
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: #ffffff;
+      color: #374151;
+      display: flex;
+      justify-content: center;
+      padding: 4rem 1rem;
+      min-height: 100vh;
+      user-select: none;
+    }
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      font-weight: 700;
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      user-select: text;
+    }
+    p.subtitle {
+      font-size: 1.125rem;
+      color: #6b7280;
+      margin-bottom: 3rem;
+      user-select: text;
+    }
+    /* Slider Wrapper */
+    .slider-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      background-color: #f9fafb;
+      padding: 1.5rem 3rem;
+      outline: none;
+    }
+    /* Track holding logos horizontally */
+    .slider-track {
+      display: flex;
+      gap: 2.5rem;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform;
+    }
+    /* Logo cards */
+    .logo-card {
+      flex: 0 0 120px;
+      background: #fff;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .logo-card:hover, .logo-card:focus {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+      outline-offset: 3px;
+      outline-color: #2563eb;
+      outline-style: solid;
+      outline-width: 2px;
+    }
+    /* Logos: simple monochrome SVG placeholders */
+    .logo {
+      width: 80px;
+      height: 40px;
+      fill: #6b7280;
+      user-select: none;
+    }
+    /* Controls (Prev/Next buttons) */
+    button.slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #ffffff;
+      border: 1.5px solid #d1d5db;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease;
+      z-index: 10;
+      color: #374151;
+    }
+    button.slider-btn:hover {
+      background-color: #2563eb;
+      border-color: #2563eb;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+      transform: translateY(-50%) scale(1.1);
+      color: #fff;
+    }
+    button.slider-btn:focus {
+      outline: none;
+      box-shadow:
+        0 0 0 3px #2563eb,
+        0 8px 24px rgba(37, 99, 235, 0.4);
+      color: #fff;
+    }
+    button.slider-btn svg {
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      width: 20px;
+      height: 20px;
+      user-select: none;
+      pointer-events: none;
+    }
+    button#prevBtn {
+      left: 12px;
+    }
+    button#nextBtn {
+      right: 12px;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .logo-card {
+        flex: 0 0 90px;
+        padding: 0.75rem;
+      }
+      .logo {
+        width: 60px;
+        height: 30px;
+      }
+      button.slider-btn {
+        width: 40px;
+        height: 40px;
+      }
+      button.slider-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+      button#prevBtn {
+        left: 8px;
+      }
+      button#nextBtn {
+        right: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="region" aria-label="Partner logos slider">
+    <h1>Trusted By</h1>
+    <p class="subtitle">Our product is used and loved by these top organizations.</p>
+    <div class="slider-wrapper" tabindex="0" aria-roledescription="carousel" aria-live="polite" aria-label="Logo slider with previous and next buttons">
+      <button id="prevBtn" class="slider-btn" aria-label="Previous logos">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="slider-track" id="sliderTrack">
+        <div class="logo-card" tabindex="0" aria-label="Logo 1: CodePen">
+          <svg class="logo" viewBox="0 0 64 32" aria-hidden="true" focusable="false" >
+            <rect width="64" height="32" rx="6" ry="6" fill="#000" />
+            <circle cx="20" cy="16" r="8" fill="#fff" />
+          </svg>
+        </div>
+        <div class="logo-card" tabindex="0" aria-label="Logo 2: GitHub">
+          <svg class="logo" viewBox="0 0 64 32" aria-hidden="true" focusable="false" >
+            <circle cx="32" cy="16" r="15" stroke="#6b7280" stroke-width="2" fill="none" />
+            <path d="M22 21c0-5 10-5 10 0" stroke="#6b7280" stroke-width="2" fill="none" />
+          </svg>
+        </div>
+        <div class="logo-card" tabindex="0" aria-label="Logo 3: Docker">
+          <svg class="logo" viewBox="0 0 64 32" aria-hidden="true" focusable="false" >
+            <rect x="12" y="2" width="10" height="10" fill="#6b7280" />
+            <rect x="25" y="10" width="20" height="10" fill="#6b7280" />
+          </svg>
+        </div>
+        <div class="logo-card" tabindex="0" aria-label="Logo 4: Figma">
+          <svg class="logo" viewBox="0 0 64 32" aria-hidden="true" focusable="false" >
+            <circle cx="16" cy="16" r="12" fill="#6b7280" />
+            <rect x="27" y="4" width="5" height="24" fill="#6b7280" />
+          </svg>
+        </div>
+        <div class="logo-card" tabindex="0" aria-label="Logo 5: Slack">
+          <svg class="logo" viewBox="0 0 64 32" aria-hidden="true" focusable="false" >
+            <line x1="12" y1="8" x2="52" y2="24" stroke="#6b7280" stroke-width="3" />
+            <line x1="52" y1="8" x2="12" y2="24" stroke="#6b7280" stroke-width="3" />
+          </svg>
+        </div>
+        <div class="logo-card" tabindex="0" aria-label="Logo 6: Spotify">
+          <svg class="logo" viewBox="0 0 64 32" aria-hidden="true" focusable="false" >
+            <ellipse cx="32" cy="16" rx="25" ry="12" fill="none" stroke="#6b7280" stroke-width="2" />
+            <path d="M12 16c8-6 24-6 36 0" stroke="#6b7280" stroke-width="2" fill="none" />
+          </svg>
+        </div>
+        <div class="logo-card" tabindex="0" aria-label="Logo 7: Tailwind CSS">
+          <svg class="logo" viewBox="0 0 64 32" aria-hidden="true" focusable="false" >
+            <path d="M8 20c12-12 24-6 36-12" stroke="#6b7280" stroke-width="3" fill="none" />
+          </svg>
+        </div>
+        <div class="logo-card" tabindex="0" aria-label="Logo 8: VS Code">
+          <svg class="logo" viewBox="0 0 64 32" aria-hidden="true" focusable="false" >
+            <polygon points="10,5 40,16 10,27" fill="none" stroke="#6b7280" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="logo-card" tabindex="0" aria-label="Logo 9: Webpack">
+          <svg class="logo" viewBox="0 0 64 32" aria-hidden="true" focusable="false" >
+            <polygon points="16,4 48,4 48,28 16,28" fill="none" stroke="#6b7280" stroke-width="2"/>
+            <line x1="16" y1="4" x2="48" y2="28" stroke="#6b7280" stroke-width="2" />
+            <line x1="48" y1="4" x2="16" y2="28" stroke="#6b7280" stroke-width="2" />
+          </svg>
+        </div>
+      </div>
+      <button id="nextBtn" class="slider-btn" aria-label="Next logos">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <script>
+    (function(){
+      const sliderTrack = document.getElementById('sliderTrack');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const logos = sliderTrack.children;
+      const totalLogos = logos.length;
+      let currentIndex = 0;
+      let isAutoPlaying = true;
+      const visibleCount = 5; // number of logos visible at once; adjust as needed
+      const slideStep = 1; // how many logos to move on prev/next
+      const slideDuration = 500; // ms transition duration
+      const autoPlayInterval = 1000; // ms between auto slide
+
+      // Calculate width of one logo item including gap
+      function getSlideWidth() {
+        if (logos.length === 0) return 0;
+        const style = getComputedStyle(logos[0]);
+        const width = logos[0].offsetWidth;
+        const marginRight = parseFloat(style.marginRight);
+        return width + (isNaN(marginRight) ? 0 : marginRight);
+      }
+
+      const slideWidth = getSlideWidth();
+
+      function updateSliderPosition() {
+        const maxIndex = totalLogos - visibleCount;
+        if (currentIndex < 0) currentIndex = maxIndex;
+        else if (currentIndex > maxIndex) currentIndex = 0;
+        const translateX = -currentIndex * slideWidth;
+        sliderTrack.style.transition = `transform ${slideDuration}ms cubic-bezier(0.4,0,0.2,1)`;
+        sliderTrack.style.transform = `translateX(${translateX}px)`;
+      }
+
+      function slideNext() {
+        currentIndex += slideStep;
+        updateSliderPosition();
+      }
+
+      function slidePrev() {
+        currentIndex -= slideStep;
+        updateSliderPosition();
+      }
+
+      let autoSlideTimer = null;
+
+      function startAutoPlay() {
+        if (autoSlideTimer) clearInterval(autoSlideTimer);
+        autoSlideTimer = setInterval(() => {
+          if (isAutoPlaying) slideNext();
+        }, autoPlayInterval);
+      }
+
+      function stopAutoPlay() {
+        if (autoSlideTimer) clearInterval(autoSlideTimer);
+        autoSlideTimer = null;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        slidePrev();
+        isAutoPlaying = false;
+        stopAutoPlay();
+        setTimeout(() => { isAutoPlaying = true; startAutoPlay(); }, autoPlayInterval * 2);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        slideNext();
+        isAutoPlaying = false;
+        stopAutoPlay();
+        setTimeout(() => { isAutoPlaying = true; startAutoPlay(); }, autoPlayInterval * 2);
+      });
+
+      // Pause autoplay when mouse is over slider or buttons
+      const sliderWrapper = document.querySelector('.slider-wrapper');
+      sliderWrapper.addEventListener('mouseenter', () => { isAutoPlaying = false; stopAutoPlay(); });
+      sliderWrapper.addEventListener('mouseleave', () => { isAutoPlaying = true; startAutoPlay(); });
+      // Also pause on focus inside slider for accessibility
+      sliderWrapper.addEventListener('focusin', () => { isAutoPlaying = false; stopAutoPlay(); });
+      sliderWrapper.addEventListener('focusout', () => { isAutoPlaying = true; startAutoPlay(); });
+
+      // Initialize
+      updateSliderPosition();
+      startAutoPlay();
+
+      // Adjust slideWidth and visibleCount on window resize
+      window.addEventListener('resize', () => {
+        // Recalculate slideWidth
+        const newSlideWidth = getSlideWidth();
+        if (newSlideWidth !== slideWidth) {
+          // Update slideWidth in closure variable? It's const, so skip here for simplicity.
+          // Just reset position so user can see consistent slides
+          updateSliderPosition();
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
+
+```
